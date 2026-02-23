@@ -1,0 +1,9 @@
+import java.util.*;
+
+public interface StudentRepository {
+    void save(StudentRecord rec);
+
+    int count();
+
+    List<StudentRecord> findAll();
+}
