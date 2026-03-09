@@ -1,35 +1,58 @@
 package com.example.map;
 
-/**
- * CURRENT STATE (BROKEN ON PURPOSE):
- * Each marker owns a private MarkerStyle created via 'new'.
- * This means identical styles are duplicated across thousands of markers.
+/*
+ * REFACTORING FOR FLYWEIGHT
  *
- * TODO (student):
- * - Store intrinsic state as a shared MarkerStyle obtained from MarkerStyleFactory.
- * - Keep only extrinsic state here: lat, lng, label.
+ * WHAT WAS WRONG BEFORE:
+ * Each MapMarker created a new MarkerStyle object inside its constructor.
+ * This caused massive duplication when thousands of markers shared the
+ * same style.
+ *
+ * DESIGN AFTER REFACTOR:
+ *
+ * INTRINSIC STATE (shared)
+ *     MarkerStyle style
+ *
+ * EXTRINSIC STATE (unique per marker)
+ *     latitude
+ *     longitude
+ *     label
+ *
+ * The style is now provided by MarkerStyleFactory and shared
+ * across markers with identical configurations.
  */
+
 public class MapMarker {
 
+    // EXTRINSIC STATE (unique for each marker)
     private final double lat;
     private final double lng;
     private final String label;
 
-    // BROKEN: style is created per marker; should be shared
+    // INTRINSIC STATE (shared Flyweight)
     private final MarkerStyle style;
 
-    public MapMarker(double lat, double lng, String label,
-                     String shape, String color, int size, boolean filled) {
+    // Constructor now receives shared MarkerStyle instead of creating it
+    public MapMarker(double lat, double lng, String label, MarkerStyle style) {
         this.lat = lat;
         this.lng = lng;
         this.label = label;
-
-        // BROKEN: per-marker allocation
-        this.style = new MarkerStyle(shape, color, size, filled);
+        this.style = style;
     }
 
-    public double getLat() { return lat; }
-    public double getLng() { return lng; }
-    public String getLabel() { return label; }
-    public MarkerStyle getStyle() { return style; }
+    public double getLat() {
+        return lat;
+    }
+
+    public double getLng() {
+        return lng;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public MarkerStyle getStyle() {
+        return style;
+    }
 }

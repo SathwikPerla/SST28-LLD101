@@ -3,27 +3,36 @@ package com.example.map;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * TODO (student):
- * Implement Flyweight factory that caches MarkerStyle by a stable key.
+/*
+ * FLYWEIGHT FACTORY
  *
- * Suggested key format:
- *   shape + "|" + color + "|" + size + "|" + (filled ? "F" : "O")
+ * RESPONSIBILITY:
+ * Maintain a cache of MarkerStyle objects and return shared instances.
  *
- * After refactor:
- * - MapDataSource should call this factory to obtain shared MarkerStyle instances.
+ * WHY THIS IS NEEDED:
+ * Without this factory, every marker would create its own style object.
+ * The factory ensures identical styles reuse the same instance.
+ *
+ * KEY IDEA:
+ * styleKey = shape|color|size|filled
  */
+
 public class MarkerStyleFactory {
 
-    private final Map<String, MarkerStyle> cache = new HashMap<>();
+    // Cache storing already created flyweight objects
+    private static final Map<String, MarkerStyle> CACHE = new HashMap<>();
 
-    public MarkerStyle get(String shape, String color, int size, boolean filled) {
+    public static MarkerStyle get(String shape, String color, int size, boolean filled) {
+
+        // Unique key representing a style configuration
         String key = shape + "|" + color + "|" + size + "|" + (filled ? "F" : "O");
-        // TODO: return cached instance if present; otherwise create, cache, and return.
-        return new MarkerStyle(shape, color, size, filled);
-    }
 
-    public int cacheSize() {
-        return cache.size();
+        // Create style only if it does not already exist
+        if (!CACHE.containsKey(key)) {
+            CACHE.put(key, new MarkerStyle(shape, color, size, filled));
+        }
+
+        // Return shared instance
+        return CACHE.get(key);
     }
 }

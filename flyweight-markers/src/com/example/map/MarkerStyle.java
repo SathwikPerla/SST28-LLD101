@@ -1,19 +1,29 @@
 package com.example.map;
 
-/**
- * CURRENT STATE (BROKEN ON PURPOSE):
- * A style object exists, but is mutable and is created per marker,
- * even when thousands of markers share the same config.
+/*
+ * REFACTORING: Flyweight Pattern
  *
- * TODO (student):
- * - Make this an immutable Flyweight (final fields, no setters).
+ * WHAT WAS WRONG BEFORE:
+ * Each MapMarker created its own MarkerStyle object even if the style
+ * configuration (shape, color, size, filled) was identical. This caused
+ * thousands of duplicate objects in memory.
+ *
+ * SOLUTION:
+ * MarkerStyle is extracted as a Flyweight object that represents
+ * INTRINSIC STATE shared across many markers.
+ *
+ * DESIGN DECISION:
+ * This class is immutable so that a single instance can be safely shared.
  */
+
 public class MarkerStyle {
 
-    private String shape;   // e.g., PIN, CIRCLE, SQUARE
-    private String color;   // e.g., RED, BLUE, GREEN
-    private int size;       // e.g., 10..20
-    private boolean filled; // filled vs outline
+    // INTRINSIC STATE (shared across many markers)
+    // All fields are final to guarantee immutability
+    private final String shape;
+    private final String color;
+    private final int size;
+    private final boolean filled;
 
     public MarkerStyle(String shape, String color, int size, boolean filled) {
         this.shape = shape;
@@ -22,16 +32,21 @@ public class MarkerStyle {
         this.filled = filled;
     }
 
-    public String getShape() { return shape; }
-    public String getColor() { return color; }
-    public int getSize() { return size; }
-    public boolean isFilled() { return filled; }
+    public String getShape() {
+        return shape;
+    }
 
-    // BROKEN: setters should go away after immutability refactor
-    public void setShape(String shape) { this.shape = shape; }
-    public void setColor(String color) { this.color = color; }
-    public void setSize(int size) { this.size = size; }
-    public void setFilled(boolean filled) { this.filled = filled; }
+    public String getColor() {
+        return color;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public boolean isFilled() {
+        return filled;
+    }
 
     @Override
     public String toString() {

@@ -16,6 +16,7 @@ import java.util.Random;
  *   1) Change MapMarker to accept MarkerStyle directly
  *   2) Use MarkerStyleFactory.get(shape,color,size,filled) here
  */
+
 public class MapDataSource {
 
     private static final String[] SHAPES = {"PIN", "CIRCLE", "SQUARE"};
@@ -37,7 +38,14 @@ public class MapDataSource {
             int size = SIZES[rnd.nextInt(SIZES.length)];
             boolean filled = rnd.nextBoolean();
 
-            out.add(new MapMarker(lat, lng, label, shape, color, size, filled));
+            // Instead of creating new MarkerStyle objects, we reuse shared ones
+            // using MarkerStyleFactory (Flyweight pattern)
+            
+            // Obtain shared style from Flyweight factory
+            MarkerStyle style = MarkerStyleFactory.get(shape, color, size, filled);
+
+            // MapMarker now receives shared style instead of creating it
+            out.add(new MapMarker(lat, lng, label, style));
         }
         return out;
     }
