@@ -1,4 +1,5 @@
 //concrete 
+// Concrete implementation of Pen representing a Gel Pen
 package pen;
 
 public class GelPen extends Pen {

@@ -1,4 +1,5 @@
 //concrete
+// Concrete implementation of Pen representing a Fountain Pen
 package pen;
 
 public class FountainPen extends Pen {

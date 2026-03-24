@@ -1,5 +1,8 @@
-package pen;
 // concrete class
+
+// Concrete implementation of Pen representing a Ball Pen
+// Defines specific characteristics like ink capacity
+package pen;
 
 public class BallPen extends Pen {
 
