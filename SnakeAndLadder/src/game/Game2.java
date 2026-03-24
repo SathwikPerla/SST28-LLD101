@@ -4,36 +4,36 @@ package game;
 
 import java.util.*;
 
-public class Game {
+public class Game2 {
 
-    private Board board;
-    private Queue<Player> players;
-    private Dice dice;
+    private Board3 board;
+    private Queue<Player5> players;
+    private Dice6 dice;
     private int totalPlayers;
 
     // Initializes board, dice and player queue
     // Players are added in a queue to simulate turn-based gameplay
 
-    public Game(int size, int numPlayers, Difficulty difficulty) {
-        this.board = new Board(size, difficulty);
-        this.dice = new Dice();
+    public Game2(int size, int numPlayers, Difficulty7 difficulty) {
+        this.board = new Board3(size, difficulty);
+        this.dice = new Dice6();
         this.players = new LinkedList<>();
         this.totalPlayers = numPlayers;
 
         for (int i = 1; i <= numPlayers; i++) {
-            players.add(new Player("P" + i));
+            players.add(new Player5("P" + i));
         }
     }
 
     // Main game loop
     // Runs until only one player remains (others have won)
     public void start() {
-        List<Player> winners = new ArrayList<>();
+        List<Player5> winners = new ArrayList<>();
 
         while (players.size() > 1) {
 
             // Fetch current player (FIFO order for turns)
-            Player current = players.poll();
+            Player5 current = players.poll();
             int roll = dice.roll();
 
             System.out.println(current.getName() + " rolled: " + roll);
