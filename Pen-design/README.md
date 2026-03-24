@@ -10,7 +10,12 @@ Overall, I focused on making the design extensible and loosely coupled.
 
 
 
-# 1. Factory Pattern
+# 1. Factory Pattern 
+## why coz ->provides a way to create objects without exposing the exact creation logic to the client
+## Loose Coupling: The client code doesn't need to know the specific class it is instantiating; it only cares about the interface or abstract class.
+## object creation code is in one place
+## can easily add new types of objects 
+
 PenFactory
 
 “I used factory pattern to centralize object creation and reduce coupling with concrete classes.”
