@@ -13,11 +13,16 @@ import java.util.Objects;
  * PaymentGateway interface response.
  */
 
-public class SafeCashAdapter implements PaymentGateway {
+
+// Adapter for SafeCash SDK
+// SafeCash returns an object instead of a transaction ID,
+// so this adapter extracts the required data.
+
+public class SafeCashAdapter3 implements PaymentGateway1 {
 
     private final SafeCashClient client;
 
-    public SafeCashAdapter(SafeCashClient client) {
+    public SafeCashAdapter3(SafeCashClient client) {
         this.client = Objects.requireNonNull(client);
     }
 

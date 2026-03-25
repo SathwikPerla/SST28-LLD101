@@ -15,11 +15,17 @@ import java.util.Objects;
  * This adapter converts the system interface to the FastPay SDK interface.
  */
 
-public class FastPayAdapter implements PaymentGateway {
+// Adapter for FastPay SDK
+// FastPay has a different method name (payNow),
+// so this adapter converts it to our standard interface (charge).
+
+//“This adapter simply maps our charge() method to FastPay’s payNow() method.”
+
+public class FastPayAdapter2 implements PaymentGateway1 {
 
     private final FastPayClient client;
 
-    public FastPayAdapter(FastPayClient client) {
+    public FastPayAdapter2(FastPayClient client) {
         this.client = Objects.requireNonNull(client);
     }
 
