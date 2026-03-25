@@ -53,6 +53,9 @@ public abstract class Pen {
         inkLevel -= text.length();
     }
 
+
+    // so this class followss srp from a perspective of what a pen has to do although it has many small responsibilities in the same niche so it is upto use wether we consider something as a single reponsibility or not and i could imporve the design byseperating the printing functionaly in a seperate class 
+
     // Closes the pen to prevent further writing
     public void close() {
         isOpen = false;
