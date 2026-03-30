@@ -15,6 +15,12 @@ package com.example.map;
  * DESIGN DECISION:
  * This class is immutable so that a single instance can be safely shared.
  */
+//So multiple MapMarker objects can safely share the same instance without risk of modification.
+
+//  * This class holds shared marker style data:
+//  * shape, color, size, filled.
+
+
 
 public class MarkerStyle {
 

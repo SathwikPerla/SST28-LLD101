@@ -3,7 +3,8 @@ package com.example.map;
 import java.util.List;
 
 /**
- * Entry point for the demo.
+ * Entry point of the application.
+ * Responsible for bootstrapping the system and running the demo.
  */
 public class App {
 
